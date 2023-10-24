@@ -8,6 +8,9 @@ from .models import (
     StudentPosition,
     Position,
     FavoriteResume,
+    Location,
+    WorkExperience,
+    Grade,
 )
 
 
@@ -24,10 +27,9 @@ class StudentUserAdmin(admin.ModelAdmin):
         "education_level",
         "grade",
         "academic_status",
-        # "specialization",
         "work_experience",
         "employment_status",
-        "city",
+        "location",
     )
     search_fields = (
         "user__first_name",
@@ -91,3 +93,21 @@ class FavoriteResumeAdmin(admin.ModelAdmin):
         "resume",
         "date_added",
     )
+
+
+@admin.register(Grade)
+class GradeAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+    search_fields = ("name",)
+
+
+@admin.register(WorkExperience)
+class WorkExperienceAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+    search_fields = ("name",)
+
+
+@admin.register(Location)
+class LocationAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+    search_fields = ("name",)

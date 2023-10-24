@@ -7,7 +7,7 @@ BASIC_LEN = 100
 
 # Выборы для учебного статуса студентов
 ACADEMIC_STATUS_CHOICES = [
-    ("passing", "Проходит обучение"),
+    ("student", "Студент"),
     ("academic_leave", "Академический отпуск"),
     ("graduate", "Выпускник"),
     ("expelled", "Отчислен"),
@@ -48,7 +48,7 @@ EDUCATION_LEVELS = [
     ("postgrad", "Ученая степень"),
 ]
 
-#
+
 POSITION_LIST = [
     ("frontend_dev", "Фронтенд-разработчик"),
     ("fullstack_dev", "Фулстек-разработчик"),
@@ -56,4 +56,11 @@ POSITION_LIST = [
     ("qa_engineer", "Инженер по тестированию"),
     ("java_dev", "Java-разработчик"),
     ("data_scientist", "Специалист по data-science"),
+]
+
+EXPERIENCE_CHOICES = [
+    ("no_experience", "Нет опыта"),
+    ("1_to_3_years", "От 1 года до 3 лет"),
+    ("3_to_6_years", "От 3 до 6 лет"),
+    ("more_than_6_years", "Более 6 лет"),
 ]

@@ -14,6 +14,7 @@ from core.texts import (
     MAIL_LEN,
     TELEGRAM_LEN,
     BASIC_LEN,
+    EXPERIENCE_CHOICES,
 )
 
 User = get_user_model()
@@ -45,7 +46,7 @@ class ContactInfo(models.Model):
         return self.alternate_email
 
     class Meta:
-        verbose_name = 'Контакт'
+        verbose_name = "Контакт"
         verbose_name_plural = "Контакты"
 
 
@@ -54,16 +55,13 @@ class Skill(models.Model):
     Модель для навыков.
     """
 
-    name = models.CharField(
-        max_length=BASIC_LEN,
-        verbose_name="Навык",
-    )
+    name = models.CharField(max_length=BASIC_LEN)
 
     def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name = 'Навык'
+        verbose_name = "Навык"
         verbose_name_plural = "Навыки"
 
 
@@ -75,13 +73,13 @@ class AcademicStatus(models.Model):
     name = models.CharField(
         max_length=NAME_LEN,
         choices=ACADEMIC_STATUS_CHOICES,
-        verbose_name="Учебный статус",
     )
 
     def __str__(self):
         return dict(ACADEMIC_STATUS_CHOICES).get(self.name, self.name)
+
     class Meta:
-        verbose_name = 'Академический статус'
+        verbose_name = "Академический статус"
         verbose_name_plural = "Академические статусы"
 
 
@@ -93,14 +91,13 @@ class EmploymentStatus(models.Model):
     name = models.CharField(
         max_length=BASIC_LEN,
         choices=EMPLOYMENT_STATUS_CHOICES,
-        verbose_name="Статус трудоустройства",
     )
 
     def __str__(self):
         return dict(EMPLOYMENT_STATUS_CHOICES).get(self.name, self.name)
-    
+
     class Meta:
-        verbose_name = 'Статус трудоустройства'
+        verbose_name = "Статус трудоустройства"
         verbose_name_plural = "Статусы трудоустройства"
 
 
@@ -112,14 +109,13 @@ class Position(models.Model):
     name = models.CharField(
         max_length=BASIC_LEN,
         choices=POSITION_LIST,
-        verbose_name="Должность",
     )
 
     def __str__(self):
         return dict(POSITION_LIST).get(self.name, self.name)
 
     class Meta:
-        verbose_name = 'Ожидаемая должность'
+        verbose_name = "Ожидаемая должность"
         verbose_name_plural = "Ожидаемые должности"
 
 
@@ -147,6 +143,38 @@ class StudentPosition(models.Model):
 
     def __str__(self):
         return f"{self.student} - {self.position}"
+
+
+class WorkExperience(models.Model):
+    name = models.CharField(
+        max_length=BASIC_LEN,
+        choices=EXPERIENCE_CHOICES,
+        verbose_name="Опыт работы",
+    )
+
+    def __str__(self):
+        return self.name
+
+
+class Grade(models.Model):
+    name = models.CharField(
+        max_length=BASIC_LEN,
+        choices=GRADE_CHOICES,
+        verbose_name="Грейд",
+    )
+
+    def __str__(self):
+        return dict(GRADE_CHOICES).get(self.name, self.name)
+
+
+class Location(models.Model):
+    name = models.CharField(
+        max_length=BASIC_LEN,
+        verbose_name="Местоположение",
+    )
+
+    def __str__(self):
+        return self.name
 
 
 class StudentResume(models.Model):
@@ -196,30 +224,25 @@ class StudentResume(models.Model):
         null=True,
         verbose_name="Статус трудоустройства",
     )
-    city = models.CharField(
-        max_length=BASIC_LEN,
+    location = models.ForeignKey(
+        Location,
+        on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        verbose_name="Город",
     )
-    # specialization = models.CharField(
-    #     max_length=BASIC_LEN,
-    #     blank=True,
-    #     null=True,
-    #     verbose_name="Специализация",
-    # )
-    work_experience = models.CharField(
-        max_length=BASIC_LEN,
+
+    work_experience = models.ForeignKey(
+        WorkExperience,
+        default="no_experience",
+        on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        verbose_name="Опыт работы",
     )
-    grade = models.CharField(
-        max_length=BASIC_LEN,
-        choices=GRADE_CHOICES,
+    grade = models.ForeignKey(
+        Grade,
+        on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        verbose_name="Грэйд",
     )
     training_status = models.ManyToManyField(
         Position,
@@ -257,7 +280,7 @@ class StudentResume(models.Model):
         return self.user.get_full_name()
 
     class Meta:
-        verbose_name = 'Резюме'
+        verbose_name = "Резюме"
         verbose_name_plural = "Резюме"
 
 
