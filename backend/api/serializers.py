@@ -1,8 +1,24 @@
-from rest_framework import serializers
-from students.models import StudentResume, ContactInfo, StudentPosition, Skill, User
-from drf_extra_fields.fields import Base64ImageField
+from core.texts import EXPERIENCE_CHOICES
 
 from djoser.serializers import UserCreateSerializer
+
+from drf_extra_fields.fields import Base64ImageField
+
+from rest_framework import serializers
+
+from students.models import (
+    AcademicStatus,
+    ContactInfo,
+    EmploymentStatus,
+    Grade,
+    Location,
+    Position,
+    Skill,
+    StudentPosition,
+    StudentResume,
+    User,
+    WorkExperience,
+)
 
 
 class UserSerializer(UserCreateSerializer):
@@ -62,7 +78,9 @@ class StudentPositionSerializer(serializers.ModelSerializer):
     и академического статуса.
     """
 
-    position_name = serializers.StringRelatedField(source="position", read_only=True)
+    position_name = serializers.StringRelatedField(
+        source="position", read_only=True
+    )
     academic_status_name = serializers.StringRelatedField(
         source="academic_status", read_only=True
     )
@@ -100,11 +118,53 @@ class SkillSerializer(serializers.ModelSerializer):
         ]
 
 
-class StudentUserSerializer(serializers.ModelSerializer):
-    """
-    Сериализатор для модели StudentUser, предоставляет данные о студентах.
-    """
+class PositionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Position
+        fields = [
+            "id",
+            "name",
+        ]
 
+
+class AcademicStatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AcademicStatus
+        fields = ["id", "name"]
+
+
+class GradeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Grade
+        fields = ["id", "name"]
+
+
+class WorkExperienceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WorkExperience
+        fields = ["id", "name"]
+
+    def to_representation(self, instance):
+        experience_dict = dict(EXPERIENCE_CHOICES)
+        return {
+            "id": instance.id,
+            "name": experience_dict.get(instance.name, instance.name),
+        }
+
+
+class LocationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Location
+        fields = ["id", "name"]
+
+
+class EmploymentStatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EmploymentStatus
+        fields = ["id", "name"]
+
+
+class StudentUserSerializer(serializers.ModelSerializer):
     user_id = serializers.IntegerField(source="user.id")
     username = serializers.CharField(source="user.username")
     first_name = serializers.CharField(source="user.first_name")
@@ -112,10 +172,15 @@ class StudentUserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(source="user.email")
     contact_info = ContactInfoSerializer()
     photo = Base64ImageField()
-    training_status = StudentPositionSerializer(many=True, source="student_positions")
-    academic_status = serializers.StringRelatedField()
-    employment_status = serializers.StringRelatedField()
+    training_status = StudentPositionSerializer(
+        many=True, source="student_positions"
+    )
+    academic_status = AcademicStatusSerializer()
+    employment_status = EmploymentStatusSerializer()
     skills = SkillSerializer(many=True)
+    grade = GradeSerializer()
+    work_experience = WorkExperienceSerializer()
+    location = LocationSerializer()
 
     class Meta:
         model = StudentResume
@@ -129,7 +194,7 @@ class StudentUserSerializer(serializers.ModelSerializer):
             "training_status",
             "date_of_birth",
             "education_level",
-            "city",
+            "location",
             "work_experience",
             "grade",
             "description",
