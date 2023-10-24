@@ -141,22 +141,17 @@ DJOSER = {
     "SET_PASSWORD_RETYPE": True,
     "HIDE_USERS": False,
     "PERMISSIONS": {
-        "activation": ["rest_framework.permissions.AllowAny"],
-        "password_reset_confirm": ["rest_framework.permissions.AllowAny"],
-        "set_password": ["djoser.permissions.CurrentUserOrAdmin"],
-        "username_reset": ["rest_framework.permissions.AllowAny"],
-        "username_reset_confirm": ["rest_framework.permissions.AllowAny"],
-        "set_username": ["djoser.permissions.CurrentUserOrAdmin"],
-        "user_create": ["rest_framework.permissions.AllowAny"],
-        "user_delete": ["djoser.permissions.CurrentUserOrAdmin"],
-        "user": ["rest_framework.permissions.AllowAny"],
-        "user_list": ["rest_framework.permissions.AllowAny"],
+        "user": ["api.permissions.OwnerUserOrReadOnly"],
+        "user_list": ["api.permissions.OwnerUserOrReadOnly"],
         "token_create": ["rest_framework.permissions.AllowAny"],
         "token_destroy": ["rest_framework.permissions.IsAuthenticated"],
     },
-    # "SERIALIZERS": {
-    #     "user": "api.serializers.test",
-    # },
+    "SERIALIZERS": {
+        "user": "api.serializers.UserSerializer",
+        "user_list": "api.serializers.UserSerializer",
+        "current_user": "api.serializers.UserSerializer",
+        "user_create": "api.serializers.UserSerializer",
+    },
 }
 
 PASSWORD_RESET_TIMEOUT = 60 * 60
@@ -169,5 +164,5 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticatedOrReadOnly",
     ],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    "PAGE_SIZE": 10,
+    "PAGE_SIZE": 6,
 }
