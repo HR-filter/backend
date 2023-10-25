@@ -1,5 +1,3 @@
-from core.texts import EXPERIENCE_CHOICES
-
 from djoser.serializers import UserCreateSerializer
 
 from drf_extra_fields.fields import Base64ImageField
@@ -198,4 +196,9 @@ class StudentUserSerializer(serializers.ModelSerializer):
             "academic_status",
             "employment_status",
             "skills",
+            "has_higher_education",
+            "has_participated_in_hackathons",
+            "has_personal_projects",
+            "skills_verified",
+            "has_video_presentation",
         ]
