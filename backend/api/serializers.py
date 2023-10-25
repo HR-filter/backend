@@ -109,56 +109,51 @@ class ContactInfoSerializer(serializers.ModelSerializer):
         ]
 
 
-class SkillSerializer(serializers.ModelSerializer):
+class BaseExperienceSerializer(serializers.Serializer):
+    def to_representation(self, instance):
+        return {
+            "id": instance.id,
+            "name": str(instance),
+        }
+
+
+class SkillSerializer(BaseExperienceSerializer):
     class Meta:
         model = Skill
-        fields = [
-            "id",
-            "name",
-        ]
+        fields = ["id", "name"]
 
 
-class PositionSerializer(serializers.ModelSerializer):
+class PositionSerializer(BaseExperienceSerializer):
     class Meta:
         model = Position
-        fields = [
-            "id",
-            "name",
-        ]
+        fields = ["id", "name"]
 
 
-class AcademicStatusSerializer(serializers.ModelSerializer):
+class AcademicStatusSerializer(BaseExperienceSerializer):
     class Meta:
         model = AcademicStatus
         fields = ["id", "name"]
 
 
-class GradeSerializer(serializers.ModelSerializer):
+class GradeSerializer(BaseExperienceSerializer):
     class Meta:
         model = Grade
         fields = ["id", "name"]
 
 
-class WorkExperienceSerializer(serializers.ModelSerializer):
+class WorkExperienceSerializer(BaseExperienceSerializer):
     class Meta:
         model = WorkExperience
         fields = ["id", "name"]
 
-    def to_representation(self, instance):
-        experience_dict = dict(EXPERIENCE_CHOICES)
-        return {
-            "id": instance.id,
-            "name": experience_dict.get(instance.name, instance.name),
-        }
 
-
-class LocationSerializer(serializers.ModelSerializer):
+class LocationSerializer(BaseExperienceSerializer):
     class Meta:
         model = Location
         fields = ["id", "name"]
 
 
-class EmploymentStatusSerializer(serializers.ModelSerializer):
+class EmploymentStatusSerializer(BaseExperienceSerializer):
     class Meta:
         model = EmploymentStatus
         fields = ["id", "name"]

@@ -4,7 +4,6 @@ from djoser.views import UserViewSet as DjoserUserViewSet
 from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
-from rest_framework.views import APIView
 
 from students.models import (
     AcademicStatus,
@@ -53,30 +52,21 @@ class StudentResumeViewSet(viewsets.ModelViewSet):
     filterset_class = StudentResumeFilter
 
 
-class FilterOptionsView(APIView):
-    def get(self, request):
-        # Получить данные для каждой модели
-        positions = Position.objects.all()
-        grades = Grade.objects.all()
-        academic_statuses = AcademicStatus.objects.all()
-        work_experiences = WorkExperience.objects.all()
-        locations = Location.objects.all()
-        employment_statuses = EmploymentStatus.objects.all()
-
-        # Сериализовать данные
-        data = {
-            "Position": PositionSerializer(positions, many=True).data,
-            "Grade": GradeSerializer(grades, many=True).data,
-            "AcademicStatus": AcademicStatusSerializer(
-                academic_statuses, many=True
-            ).data,
-            "WorkExperience": WorkExperienceSerializer(
-                work_experiences, many=True
-            ).data,
-            "Location": LocationSerializer(locations, many=True).data,
-            "EmploymentStatus": EmploymentStatusSerializer(
-                employment_statuses, many=True
-            ).data,
+class FilterOptionsViewSet(viewsets.ViewSet):
+    def list(self, request):
+        model_serializers = {
+            Position: PositionSerializer,
+            Grade: GradeSerializer,
+            AcademicStatus: AcademicStatusSerializer,
+            WorkExperience: WorkExperienceSerializer,
+            Location: LocationSerializer,
+            EmploymentStatus: EmploymentStatusSerializer,
         }
+
+        data = {}
+
+        for model, serializer in model_serializers.items():
+            queryset = model.objects.all()
+            data[model.__name__] = serializer(queryset, many=True).data
 
         return Response(data)

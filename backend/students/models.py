@@ -153,7 +153,7 @@ class WorkExperience(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return dict(EXPERIENCE_CHOICES).get(self.name)
 
 
 class Grade(models.Model):
@@ -164,7 +164,7 @@ class Grade(models.Model):
     )
 
     def __str__(self):
-        return dict(GRADE_CHOICES).get(self.name, self.name)
+        return dict(GRADE_CHOICES).get(self.name)
 
 
 class Location(models.Model):
