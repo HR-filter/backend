@@ -2,7 +2,7 @@ from django.urls import include, path
 
 from rest_framework import routers
 
-from .views import StudentUserViewSet, PublicUserViewSet, FilterOptionsView
+from .views import StudentUserViewSet, PublicUserViewSet, FilterOptionsViewSet
 from docs.views import schema_view
 
 app_name = "api"
@@ -11,6 +11,7 @@ app_name = "api"
 router_v1 = routers.DefaultRouter()
 router_v1.register("test", StudentUserViewSet, "test")
 router_v1.register("users", PublicUserViewSet, "users")
+router_v1.register(r'filters', FilterOptionsViewSet, 'filters')
 
 
 urlpatterns = (
@@ -21,5 +22,4 @@ urlpatterns = (
         schema_view.with_ui("redoc", cache_timeout=0),
         name="schema-redoc",
     ),
-    path("filters/", FilterOptionsView.as_view(), name="filter-options"),
 )

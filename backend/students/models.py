@@ -17,6 +17,8 @@ from core.texts import (
     EXPERIENCE_CHOICES,
 )
 
+from .utils import student_photo_upload, student_resume_upload
+
 User = get_user_model()
 
 
@@ -119,6 +121,49 @@ class Position(models.Model):
         verbose_name_plural = "Ожидаемые должности"
 
 
+class WorkExperience(models.Model):
+    name = models.CharField(
+        max_length=BASIC_LEN,
+        choices=EXPERIENCE_CHOICES,
+    )
+
+    def __str__(self):
+        return dict(EXPERIENCE_CHOICES).get(self.name)
+
+    class Meta:
+        verbose_name = "Опыт работы"
+        verbose_name_plural = "Опыт работы"
+
+
+class Grade(models.Model):
+    name = models.CharField(
+        max_length=BASIC_LEN,
+        choices=GRADE_CHOICES,
+        verbose_name="Грейд",
+    )
+
+    def __str__(self):
+        return dict(GRADE_CHOICES).get(self.name)
+
+    class Meta:
+        verbose_name = "Грейд"
+        verbose_name_plural = "Грейды"
+
+
+class Location(models.Model):
+    name = models.CharField(
+        max_length=BASIC_LEN,
+    )
+
+    def __str__(self):
+        return self.name
+
+
+class Meta:
+    verbose_name = "Местоположение"
+    verbose_name_plural = "Местоположение"
+
+
 class StudentPosition(models.Model):
     """Промежуточная модель для связи между студентом и позицией"""
 
@@ -143,38 +188,6 @@ class StudentPosition(models.Model):
 
     def __str__(self):
         return f"{self.student} - {self.position}"
-
-
-class WorkExperience(models.Model):
-    name = models.CharField(
-        max_length=BASIC_LEN,
-        choices=EXPERIENCE_CHOICES,
-        verbose_name="Опыт работы",
-    )
-
-    def __str__(self):
-        return self.name
-
-
-class Grade(models.Model):
-    name = models.CharField(
-        max_length=BASIC_LEN,
-        choices=GRADE_CHOICES,
-        verbose_name="Грейд",
-    )
-
-    def __str__(self):
-        return dict(GRADE_CHOICES).get(self.name, self.name)
-
-
-class Location(models.Model):
-    name = models.CharField(
-        max_length=BASIC_LEN,
-        verbose_name="Местоположение",
-    )
-
-    def __str__(self):
-        return self.name
 
 
 class StudentResume(models.Model):
@@ -258,14 +271,14 @@ class StudentResume(models.Model):
     )
 
     photo = models.ImageField(
-        upload_to="student_photos/",
+        upload_to=student_photo_upload,
         blank=True,
         null=True,
         verbose_name="Фото",
     )
 
     resume = models.FileField(
-        upload_to="student_resumes/",
+        upload_to=student_resume_upload,
         blank=True,
         null=True,
         verbose_name="Резюме",
