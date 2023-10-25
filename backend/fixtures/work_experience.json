@@ -1,0 +1,30 @@
+[
+    {
+        "model": "students.workexperience",
+        "pk": 1,
+        "fields": {
+            "name": "no_experience"
+        }
+    },
+    {
+        "model": "students.workexperience",
+        "pk": 2,
+        "fields": {
+            "name": "1_to_3_years"
+        }
+    },
+    {
+        "model": "students.workexperience",
+        "pk": 3,
+        "fields": {
+            "name": "3_to_6_years"
+        }
+    },
+    {
+        "model": "students.workexperience",
+        "pk": 4,
+        "fields": {
+            "name": "more_than_6_years"
+        }
+    }
+]

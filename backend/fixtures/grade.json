@@ -1,0 +1,16 @@
+[
+    {
+        "model": "students.grade",
+        "pk": 1,
+        "fields": {
+            "name": "junior"
+        }
+    },
+    {
+        "model": "students.grade",
+        "pk": 2,
+        "fields": {
+            "name": "middle"
+        }
+    }
+]

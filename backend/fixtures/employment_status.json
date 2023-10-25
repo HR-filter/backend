@@ -1,0 +1,30 @@
+[
+    {
+        "model": "students.employmentstatus",
+        "pk": 1,
+        "fields": {
+            "name": "job_search"
+        }
+    },
+    {
+        "model": "students.employmentstatus",
+        "pk": 2,
+        "fields": {
+            "name": "employed"
+        }
+    },
+    {
+        "model": "students.employmentstatus",
+        "pk": 3,
+        "fields": {
+            "name": "internship_search"
+        }
+    },
+    {
+        "model": "students.employmentstatus",
+        "pk": 4,
+        "fields": {
+            "name": "other"
+        }
+    }
+]
