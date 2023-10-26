@@ -1,0 +1,30 @@
+[
+    {
+        "model": "students.academicstatus",
+        "pk": 1,
+        "fields": {
+            "name": "student"
+        }
+    },
+    {
+        "model": "students.academicstatus",
+        "pk": 2,
+        "fields": {
+            "name": "academic_leave"
+        }
+    },
+    {
+        "model": "students.academicstatus",
+        "pk": 3,
+        "fields": {
+            "name": "graduate"
+        }
+    },
+    {
+        "model": "students.academicstatus",
+        "pk": 4,
+        "fields": {
+            "name": "expelled"
+        }
+    }
+]

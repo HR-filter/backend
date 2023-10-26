@@ -1,0 +1,16 @@
+[
+    {
+        "model": "students.location",
+        "pk": 1,
+        "fields": {
+            "name": "Местоположение 1"
+        }
+    },
+    {
+        "model": "students.location",
+        "pk": 2,
+        "fields": {
+            "name": "Местоположение 2"
+        }
+    }
+]

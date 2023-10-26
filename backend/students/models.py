@@ -158,10 +158,9 @@ class Location(models.Model):
     def __str__(self):
         return self.name
 
-
-class Meta:
-    verbose_name = "Местоположение"
-    verbose_name_plural = "Местоположение"
+    class Meta:
+        verbose_name = "Местоположение"
+        verbose_name_plural = "Местоположение"
 
 
 class StudentPosition(models.Model):
@@ -199,6 +198,7 @@ class StudentResume(models.Model):
         User,
         on_delete=models.CASCADE,
         related_name="student_resume",
+        verbose_name="Cтудент",
     )
     date_of_birth = models.DateField(
         blank=True,
@@ -282,6 +282,27 @@ class StudentResume(models.Model):
         blank=True,
         null=True,
         verbose_name="Резюме",
+    )
+
+    has_higher_education = models.BooleanField(
+        default=False,
+        verbose_name="Высшее образование",
+    )
+    has_participated_in_hackathons = models.BooleanField(
+        default=False,
+        verbose_name="Участие в хакатонах",
+    )
+    has_personal_projects = models.BooleanField(
+        default=False,
+        verbose_name="Наличие пет-проектов",
+    )
+    skills_verified = models.BooleanField(
+        default=False,
+        verbose_name="Навыки подтверждены",
+    )
+    has_video_presentation = models.BooleanField(
+        default=False,
+        verbose_name="С видео-презентацией",
     )
 
     REQUIRED_FIELDS = [

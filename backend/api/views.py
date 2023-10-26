@@ -45,13 +45,6 @@ class PublicUserViewSet(DjoserUserViewSet):
     # permission_classes = [IsAuthenticated]
 
 
-class StudentResumeViewSet(viewsets.ModelViewSet):
-    queryset = StudentResume.objects.all()
-    serializer_class = StudentUserSerializer
-    filter_backends = (DjangoFilterBackend,)
-    filterset_class = StudentResumeFilter
-
-
 class FilterOptionsViewSet(viewsets.ViewSet):
     def list(self, request):
         model_serializers = {
@@ -68,5 +61,11 @@ class FilterOptionsViewSet(viewsets.ViewSet):
         for model, serializer in model_serializers.items():
             queryset = model.objects.all()
             data[model.__name__] = serializer(queryset, many=True).data
+
+        data["has_higher_education"] = False
+        data["has_participated_in_hackathons"] = False
+        data["has_personal_projects"] = False
+        data["skills_verified"] = False
+        data["has_video_presentation"] = False
 
         return Response(data)
