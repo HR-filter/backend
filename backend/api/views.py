@@ -1,5 +1,8 @@
 from django_filters.rest_framework import DjangoFilterBackend
+
 from djoser.views import UserViewSet as DjoserUserViewSet
+
+from drf_yasg.utils import swagger_auto_schema
 
 from rest_framework import filters, viewsets
 from rest_framework.pagination import PageNumberPagination
@@ -46,6 +49,7 @@ class PublicUserViewSet(DjoserUserViewSet):
 
 
 class FilterOptionsViewSet(viewsets.ViewSet):
+    @swagger_auto_schema(operation_id="list_filter_options")
     def list(self, request):
         model_serializers = {
             Position: PositionSerializer,
@@ -62,10 +66,20 @@ class FilterOptionsViewSet(viewsets.ViewSet):
             queryset = model.objects.all()
             data[model.__name__] = serializer(queryset, many=True).data
 
-        data["has_higher_education"] = False
-        data["has_participated_in_hackathons"] = False
-        data["has_personal_projects"] = False
-        data["skills_verified"] = False
-        data["has_video_presentation"] = False
+        return Response(data)
+
+
+class FilterBooleanOpitionViewSet(viewsets.ViewSet):
+    @swagger_auto_schema(operation_id="list_filter_boolean_options")
+    def list(self, request):
+        default_options = [
+            "has_higher_education",
+            "has_participated_in_hackathons",
+            "has_personal_projects",
+            "skills_verified",
+            "has_video_presentation",
+        ]
+
+        data = {option: False for option in default_options}
 
         return Response(data)
