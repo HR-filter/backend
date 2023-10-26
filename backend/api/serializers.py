@@ -174,6 +174,7 @@ class StudentUserSerializer(serializers.ModelSerializer):
     grade = GradeSerializer()
     work_experience = WorkExperienceSerializer()
     location = LocationSerializer()
+    percentage_match = serializers.IntegerField(read_only=True, default=0)
 
     class Meta:
         model = StudentResume
@@ -201,4 +202,5 @@ class StudentUserSerializer(serializers.ModelSerializer):
             "has_personal_projects",
             "skills_verified",
             "has_video_presentation",
+            "percentage_match",
         ]

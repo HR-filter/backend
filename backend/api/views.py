@@ -1,7 +1,7 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from djoser.views import UserViewSet as DjoserUserViewSet
 
-from rest_framework import viewsets
+from rest_framework import filters, viewsets
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
@@ -32,7 +32,7 @@ from .serializers import (
 class StudentUserViewSet(viewsets.ModelViewSet):
     queryset = StudentResume.objects.all()
     serializer_class = StudentUserSerializer
-    filter_backends = (DjangoFilterBackend,)
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
     filterset_class = StudentResumeFilter
 
 
