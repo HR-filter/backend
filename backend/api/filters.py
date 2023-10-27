@@ -24,7 +24,6 @@ class StudentResumeFilter(django_filters.FilterSet):
             "work_experience": "work_experience",
             "location": "location",
             "employment_status": "employment_status",
-            "training_status": "training_status",
             "has_higher_education": "has_higher_education",
             "has_participated_in_hackathons": "has_participated_in_hackathons",
             "has_personal_projects": "has_personal_projects",

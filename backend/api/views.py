@@ -13,7 +13,6 @@ from students.models import (
     EmploymentStatus,
     Grade,
     Location,
-    Position,
     StudentResume,
     User,
     WorkExperience,
@@ -25,7 +24,6 @@ from .serializers import (
     EmploymentStatusSerializer,
     GradeSerializer,
     LocationSerializer,
-    PositionSerializer,
     StudentUserSerializer,
     UserSerializer,
     WorkExperienceSerializer,
@@ -52,7 +50,6 @@ class FilterOptionsViewSet(viewsets.ViewSet):
     @swagger_auto_schema(operation_id="list_filter_options")
     def list(self, request):
         model_serializers = {
-            Position: PositionSerializer,
             Grade: GradeSerializer,
             AcademicStatus: AcademicStatusSerializer,
             WorkExperience: WorkExperienceSerializer,

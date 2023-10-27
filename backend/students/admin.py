@@ -5,18 +5,11 @@ from .models import (
     Skill,
     AcademicStatus,
     EmploymentStatus,
-    StudentPosition,
-    Position,
     FavoriteResume,
     Location,
     WorkExperience,
     Grade,
 )
-
-
-class StudentPositionInline(admin.TabularInline):
-    model = StudentPosition
-    extra = 1
 
 
 @admin.register(StudentResume)
@@ -40,7 +33,6 @@ class StudentUserAdmin(admin.ModelAdmin):
     )
 
     list_filter = ("grade",)
-    inlines = [StudentPositionInline]
 
     def get_full_name(self, obj):
         return obj.user.get_full_name()
@@ -71,12 +63,6 @@ class AcademicStatusAdmin(admin.ModelAdmin):
 
 @admin.register(EmploymentStatus)
 class EmploymentStatusAdmin(admin.ModelAdmin):
-    list_display = ("name",)
-    search_fields = ("name",)
-
-
-@admin.register(Position)
-class PositionStatusAdmin(admin.ModelAdmin):
     list_display = ("name",)
     search_fields = ("name",)
 
