@@ -8,7 +8,6 @@ from core.texts import (
     EDUCATION_LEVELS,
     EMPLOYMENT_STATUS_CHOICES,
     GRADE_CHOICES,
-    POSITION_LIST,
     NAME_LEN,
     PHONE_LEN,
     MAIL_LEN,
@@ -114,28 +113,10 @@ class EmploymentStatus(models.Model):
         verbose_name_plural = "Статусы трудоустройства"
 
 
-class Position(models.Model):
-    """
-    Модель выбора ожидаемой должности.
-    """
-
-    name = models.CharField(
-        max_length=BASIC_LEN,
-        choices=POSITION_LIST,
-        verbose_name="Ожидаемая должность",
-        help_text="Выберите ожидаемую должность студента.",
-    )
-
-    def __str__(self):
-        return dict(POSITION_LIST).get(self.name, self.name)
-
-    class Meta:
-        verbose_name = "Ожидаемая должность"
-        verbose_name_plural = "Ожидаемые должности"
-
-
 class WorkExperience(models.Model):
-    """Модель выбора опыта работы."""
+    """
+    Модель выбора опыта работы.
+    """
 
     name = models.CharField(
         max_length=BASIC_LEN,
@@ -153,6 +134,10 @@ class WorkExperience(models.Model):
 
 
 class Grade(models.Model):
+    """
+    Модель грейда студента.
+    """
+
     name = models.CharField(
         max_length=BASIC_LEN,
         choices=GRADE_CHOICES,
@@ -169,7 +154,9 @@ class Grade(models.Model):
 
 
 class Location(models.Model):
-    """Модель метосоположения."""
+    """
+    Модель метосоположения.
+    """
 
     name = models.CharField(
         max_length=BASIC_LEN,
@@ -183,35 +170,6 @@ class Location(models.Model):
     class Meta:
         verbose_name = "Местоположение"
         verbose_name_plural = "Местоположения"
-
-
-class StudentPosition(models.Model):
-    """Промежуточная модель для связи между студентом и позицией"""
-
-    student = models.ForeignKey(
-        "StudentResume",
-        on_delete=models.CASCADE,
-        related_name="positions",
-        verbose_name="Студент",
-        help_text="Выберите студента для связи с позицией.",
-    )
-    position = models.ForeignKey(
-        Position,
-        on_delete=models.CASCADE,
-        verbose_name="Позиция",
-        help_text="Выберите позицию для связи с студентом.",
-    )
-    academic_status = models.ForeignKey(
-        AcademicStatus,
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-        verbose_name="Учебный статус",
-        help_text="Выберите учебный статус студента (при наличии).",
-    )
-
-    def __str__(self):
-        return f"{self.student} - {self.position}"
 
 
 class StudentResume(models.Model):
@@ -278,7 +236,6 @@ class StudentResume(models.Model):
         verbose_name="Местоположение",
         help_text="Выберите местоположение студента (при наличии).",
     )
-
     work_experience = models.ForeignKey(
         WorkExperience,
         default="no_experience",
@@ -296,22 +253,12 @@ class StudentResume(models.Model):
         verbose_name="Грейд",
         help_text="Выберите грейд студента (при наличии).",
     )
-    training_status = models.ManyToManyField(
-        Position,
-        through=StudentPosition,
-        verbose_name="Предпочтительные должности",
-        blank=True,
-        help_text="Выберите предпочтительные должности "
-        "для студента (при наличии).",
-    )
-
     description = models.TextField(
         blank=True,
         null=True,
         verbose_name="О себе",
         help_text="Введите описание студента (при наличии).",
     )
-
     photo = models.ImageField(
         upload_to=student_photo_upload,
         blank=True,
@@ -319,13 +266,25 @@ class StudentResume(models.Model):
         verbose_name="Фото",
         help_text="Загрузите фотографию студента (при наличии).",
     )
-
     resume = models.FileField(
         upload_to=student_resume_upload,
         blank=True,
         null=True,
         verbose_name="Резюме",
         help_text="Загрузите резюме студента (при наличии).",
+    )
+    achievement = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        verbose_name="Достижения",
+        help_text="Укажите свои достижения (при наличии)."
+    )
+    portfolio = models.URLField(
+        blank=True,
+        null=True,
+        verbose_name="Портфолио",
+        help_text="Прикрепите ссылку на портфолио (при наличии).",
     )
 
     has_higher_education = models.BooleanField(
@@ -353,6 +312,10 @@ class StudentResume(models.Model):
         verbose_name="С видео-презентацией",
         help_text="Укажите, есть ли у студента видео-презентация.",
     )
+    viewed = models.BooleanField(
+        default=False,
+        verbose_name="Отметка о просмотре",
+    )
 
     REQUIRED_FIELDS = [
         "date_of_birth",
@@ -368,6 +331,9 @@ class StudentResume(models.Model):
 
 
 class FavoriteResume(models.Model):
+    """
+    Модель избранных резюме.
+    """
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,

@@ -10,9 +10,7 @@ from students.models import (
     EmploymentStatus,
     Grade,
     Location,
-    Position,
     Skill,
-    StudentPosition,
     StudentResume,
     User,
     WorkExperience,
@@ -70,28 +68,6 @@ class UserSerializer(UserCreateSerializer):
         return data
 
 
-class StudentPositionSerializer(serializers.ModelSerializer):
-    """
-    Сериализатор для модели StudentPosition, предоставляет имена позиции
-    и академического статуса.
-    """
-
-    position_name = serializers.StringRelatedField(
-        source="position", read_only=True
-    )
-    academic_status_name = serializers.StringRelatedField(
-        source="academic_status", read_only=True
-    )
-
-    class Meta:
-        model = StudentPosition
-        fields = [
-            "id",
-            "position_name",
-            "academic_status_name",
-        ]
-
-
 class ContactInfoSerializer(serializers.ModelSerializer):
     """
     Сериализатор для модели ContactInfo, предоставляет информацию
@@ -118,12 +94,6 @@ class BaseExperienceSerializer(serializers.Serializer):
 class SkillSerializer(BaseExperienceSerializer):
     class Meta:
         model = Skill
-        fields = ["id", "name"]
-
-
-class PositionSerializer(BaseExperienceSerializer):
-    class Meta:
-        model = Position
         fields = ["id", "name"]
 
 
@@ -165,9 +135,6 @@ class StudentUserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(source="user.email")
     contact_info = ContactInfoSerializer()
     photo = Base64ImageField()
-    training_status = StudentPositionSerializer(
-        many=True, source="student_positions"
-    )
     academic_status = AcademicStatusSerializer()
     employment_status = EmploymentStatusSerializer()
     skills = SkillSerializer(many=True)
@@ -175,6 +142,8 @@ class StudentUserSerializer(serializers.ModelSerializer):
     work_experience = WorkExperienceSerializer()
     location = LocationSerializer()
     percentage_match = serializers.IntegerField(read_only=True, default=0)
+    achievement = serializers.CharField()
+    portfolio = serializers.URLField()
 
     class Meta:
         model = StudentResume
@@ -185,7 +154,6 @@ class StudentUserSerializer(serializers.ModelSerializer):
             "last_name",
             "email",
             "photo",
-            "training_status",
             "date_of_birth",
             "education_level",
             "location",
@@ -193,6 +161,8 @@ class StudentUserSerializer(serializers.ModelSerializer):
             "grade",
             "description",
             "resume",
+            "achievement",
+            "portfolio",
             "contact_info",
             "academic_status",
             "employment_status",
@@ -203,4 +173,5 @@ class StudentUserSerializer(serializers.ModelSerializer):
             "skills_verified",
             "has_video_presentation",
             "percentage_match",
+            "viewed",
         ]
