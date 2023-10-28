@@ -9,43 +9,117 @@ from .models import (
     Location,
     WorkExperience,
     Grade,
+    Specialization,
+    Course,
+    Language,
+    Education,
+    Project,
+    PortfolioLink,
 )
+
+
+class EducationInline(admin.TabularInline):
+    model = StudentResume.educations.through
+    extra = 1
+
+
+class LanguagesInline(admin.TabularInline):
+    model = StudentResume.languages.through
+    extra = 1
+
+
+class PortfolioInline(admin.TabularInline):
+    model = StudentResume.portfolio.through
+    extra = 1
+
+
+class ProjectsInline(admin.TabularInline):
+    model = StudentResume.projects.through
+    extra = 1
+
+
+class WorkExperienceInline(admin.TabularInline):
+    model = StudentResume.work_experience.through
+    extra = 1
 
 
 @admin.register(StudentResume)
 class StudentUserAdmin(admin.ModelAdmin):
     list_display = (
-        "get_full_name",
+        "user",
         "date_of_birth",
-        "education_level",
-        "grade",
         "academic_status",
-        "work_experience",
+        "grade",
         "employment_status",
         "location",
+        "specialization",
     )
     search_fields = (
         "user__first_name",
         "user__last_name",
-        "student_resume__contact_info__alternate_email",
-        "city",
-        "specialization",
+        "contact_info__alternate_email",
+        "location__name",
     )
-
     list_filter = ("grade",)
+    inlines = [
+        LanguagesInline,
+        ProjectsInline,
+        EducationInline,
+        PortfolioInline,
+        WorkExperienceInline,
+    ]
 
-    def get_full_name(self, obj):
-        return obj.user.get_full_name()
-
-    get_full_name.short_description = "Имя Отвечство"
-
-    def grade(self, obj):
-        return obj.student_info.grade
+    fieldsets = (
+        (
+            "Персональная информация",
+            {
+                "fields": (
+                    "user",
+                    "date_of_birth",
+                    "description",
+                    "photo",
+                    "location",
+                )
+            },
+        ),
+        (
+            "Контактная информация",
+            {"fields": ("contact_info",)},
+        ),
+        (
+            "Информация об образовании",
+            {"fields": ("academic_status",)},
+        ),
+        (
+            "Трудоустройство и Специализация",
+            {
+                "fields": (
+                    "specialization",
+                    "courses",
+                    "employment_status",
+                    "grade",
+                    "experience",
+                )
+            },
+        ),
+        (
+            "Дополнительная информация",
+            {
+                "fields": (
+                    "has_higher_education",
+                    "has_participated_in_hackathons",
+                    "has_personal_projects",
+                    "skills_verified",
+                    "has_video_presentation",
+                )
+            },
+        ),
+    )
 
 
 @admin.register(ContactInfo)
 class ContactInfoAdmin(admin.ModelAdmin):
-    list_display = ("alternate_email", "phone_number", "telegram_login")
+    list_display = ("phone_number", "alternate_email", "telegram_login")
     search_fields = ("alternate_email", "phone_number")
 
 
@@ -69,16 +143,8 @@ class EmploymentStatusAdmin(admin.ModelAdmin):
 
 @admin.register(FavoriteResume)
 class FavoriteResumeAdmin(admin.ModelAdmin):
-    list_display = (
-        "user",
-        "resume",
-        "date_added",
-    )
-    search_fields = (
-        "user",
-        "resume",
-        "date_added",
-    )
+    list_display = ("user", "resume", "date_added")
+    search_fields = ("user__username", "resume__user__username")
 
 
 @admin.register(Grade)
@@ -87,13 +153,57 @@ class GradeAdmin(admin.ModelAdmin):
     search_fields = ("name",)
 
 
-@admin.register(WorkExperience)
-class WorkExperienceAdmin(admin.ModelAdmin):
-    list_display = ("name",)
-    search_fields = ("name",)
-
-
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
     list_display = ("name",)
     search_fields = ("name",)
+
+
+@admin.register(Specialization)
+class SpecializationAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+    search_fields = ("name",)
+
+
+@admin.register(Course)
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ("specialization",)
+    search_fields = ("specialization__name",)
+
+
+@admin.register(Language)
+class LanguageAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+    search_fields = ("name",)
+
+
+@admin.register(Education)
+class EducationAdmin(admin.ModelAdmin):
+    list_display = ("institution", "specialization", "education_level")
+    search_fields = ("institution", "specialization")
+
+
+@admin.register(Project)
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ("title", "description")
+    search_fields = ("title", "description")
+
+
+@admin.register(PortfolioLink)
+class PortfolioLinkAdmin(admin.ModelAdmin):
+    list_display = ("url",)
+    search_fields = ("url",)
+
+
+@admin.register(WorkExperience)
+class WorkExperienceAdmin(admin.ModelAdmin):
+    list_display = (
+        "name",
+        "start_date",
+        "description",
+    )
+    search_fields = (
+        "name",
+        "start_date",
+        "description",
+    )

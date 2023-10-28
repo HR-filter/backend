@@ -13,6 +13,7 @@ from core.texts import (
     MAIL_LEN,
     TELEGRAM_LEN,
     BASIC_LEN,
+    POSITION_LIST,
     EXPERIENCE_CHOICES,
 )
 
@@ -34,7 +35,6 @@ class ContactInfo(models.Model):
     )
     alternate_email = models.EmailField(
         max_length=MAIL_LEN,
-        unique=True,
         verbose_name="Дополнительный адрес электронной почты",
         help_text="Укажите дополнительный адрес электронной почты студента.",
     )
@@ -54,28 +54,9 @@ class ContactInfo(models.Model):
         verbose_name_plural = "Контакты"
 
 
-class Skill(models.Model):
-    """
-    Модель для навыков.
-    """
-
-    name = models.CharField(
-        max_length=BASIC_LEN,
-        verbose_name="Наименование навыка",
-        help_text="Введите наименование навыка.",
-    )
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = "Навык"
-        verbose_name_plural = "Навыки"
-
-
 class AcademicStatus(models.Model):
     """
-    Модель для статуса обучения.
+    Модель для хранения академического статуса студента.
     """
 
     name = models.CharField(
@@ -95,7 +76,7 @@ class AcademicStatus(models.Model):
 
 class EmploymentStatus(models.Model):
     """
-    Модель для статуса трудоустройства.
+    Модель для хранения статуса трудоустройства студента.
     """
 
     name = models.CharField(
@@ -114,19 +95,32 @@ class EmploymentStatus(models.Model):
 
 
 class WorkExperience(models.Model):
-    """
-    Модель выбора опыта работы.
-    """
+    """Модель для хранения информации об опыте работы студента."""
 
     name = models.CharField(
         max_length=BASIC_LEN,
-        choices=EXPERIENCE_CHOICES,
-        verbose_name="Опыт работы",
-        help_text="Выберите опыт работы студента.",
+        verbose_name="Название места работы",
+        help_text="Укажите название места работы студента.",
+    )
+    start_date = models.DateField(
+        verbose_name="Дата начала работы",
+        help_text="Укажите дату начала работы на данном месте.",
+    )
+    end_date = models.DateField(
+        blank=True,
+        null=True,
+        verbose_name="Дата окончания работы",
+        help_text="Укажите дату окончания работы.",
+    )
+    description = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name="Описание опыта работы",
+        help_text="Добавьте описание опыта работы на данном месте.",
     )
 
     def __str__(self):
-        return dict(EXPERIENCE_CHOICES).get(self.name)
+        return self.name
 
     class Meta:
         verbose_name = "Опыт работы"
@@ -172,6 +166,222 @@ class Location(models.Model):
         verbose_name_plural = "Местоположения"
 
 
+class Experience(models.Model):
+    """
+    Модель выбора опыта работы.
+    """
+
+    name = models.CharField(
+        max_length=BASIC_LEN,
+        choices=EXPERIENCE_CHOICES,
+        verbose_name="Опыт работы",
+        help_text="Выберите опыт работы студента.",
+    )
+
+    def __str__(self):
+        return dict(EXPERIENCE_CHOICES).get(self.name)
+
+    class Meta:
+        verbose_name = "Опыт работы"
+        verbose_name_plural = "Опыт работы"
+
+
+class Specialization(models.Model):
+    """
+    Модель выбора ожидаемой должности.
+    """
+
+    name = models.CharField(
+        max_length=BASIC_LEN,
+        choices=POSITION_LIST,
+        verbose_name="Специализация",
+        help_text="Выберите специализацию студента.",
+    )
+
+    def __str__(self):
+        return dict(POSITION_LIST).get(self.name, self.name)
+
+    class Meta:
+        verbose_name = "Специализация"
+        verbose_name_plural = "Специализации"
+
+
+class Skill(models.Model):
+    """
+    Модель для навыков.
+    """
+
+    name = models.CharField(
+        max_length=BASIC_LEN,
+        verbose_name="Наименование навыка",
+        help_text="Введите наименование навыка.",
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Навык"
+        verbose_name_plural = "Навыки"
+
+
+class Course(models.Model):
+    """Модель, связывающая специализацию с навыками, необходимыми для курса."""
+
+    specialization = models.ForeignKey(
+        Specialization,
+        on_delete=models.CASCADE,
+        related_name="courses",
+        verbose_name="Специализация",
+    )
+    skills = models.ManyToManyField(
+        Skill, related_name="courses", verbose_name="Навыки"
+    )
+
+    def __str__(self):
+        return self.specialization.name
+
+
+class PortfolioLink(models.Model):
+    """Модель для хранения ссылок на портфолио студента."""
+
+    url = models.URLField(verbose_name="URL")
+    help_text = ("Добавьте ссылки на портфоли.",)
+
+    class Meta:
+        verbose_name = "Портфолио-ссылка"
+        verbose_name_plural = "Портфолио-ссылки"
+
+    def __str__(self):
+        return self.url
+
+
+class Project(models.Model):
+    """
+    Модель для хранения информации о проектах студента,
+    включая название и описание.
+    """
+
+    title = models.CharField(
+        max_length=BASIC_LEN,
+        verbose_name="Название проекта",
+        help_text="Укажите название проекта.",
+    )
+    description = models.TextField(
+        verbose_name="Описание проекта",
+        help_text="Укажите краткое описание проекта.",
+    )
+
+    def __str__(self):
+        return self.title
+
+
+class Language(models.Model):
+    """Модель для хранения информации о языках и уровнях владения ими."""
+
+    name = models.CharField(
+        max_length=BASIC_LEN,
+        help_text="Укажите язык и уровень владения.",
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Язык"
+        verbose_name_plural = "Языки"
+
+
+class Education(models.Model):
+    """Модель для хранения информации об образовании студента."""
+
+    institution = models.CharField(
+        max_length=BASIC_LEN,
+        verbose_name="Место обучения",
+        help_text="Укажите место обучения.",
+    )
+    specialization = models.CharField(
+        max_length=BASIC_LEN,
+        verbose_name="Специальность",
+        help_text="Укажите специальность.",
+    )
+    education_level = models.CharField(
+        max_length=BASIC_LEN,
+        choices=EDUCATION_LEVELS,
+        blank=True,
+        null=True,
+        verbose_name="Уровень образования",
+        help_text="Выберите уровень образования студента (при наличии).",
+    )
+
+    def __str__(self):
+        return dict(EDUCATION_LEVELS).get(self.education_level)
+
+
+class StudentResumeSkills(models.Model):
+    """Связующая модель между резюме студента и навыками."""
+
+    student_resume = models.ForeignKey(
+        "StudentResume",
+        on_delete=models.CASCADE,
+    )
+    skill = models.ForeignKey(
+        Skill,
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        return f"{self.student_resume} - {self.skill}"
+
+
+class StudentResumeLanguages(models.Model):
+    """Связующая модель между резюме студента и языками."""
+
+    student_resume = models.ForeignKey(
+        "StudentResume",
+        on_delete=models.CASCADE,
+    )
+    language = models.ForeignKey(
+        Language,
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        return f"{self.student_resume} - {self.language}"
+
+
+class StudentResumeEducations(models.Model):
+    """Связующая модель между резюме студента и уровнем образования."""
+
+    student_resume = models.ForeignKey(
+        "StudentResume",
+        on_delete=models.CASCADE,
+    )
+    education = models.ForeignKey(
+        Education,
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        return f"{self.student_resume} - {self.education}"
+
+
+class StudentResumeProjects(models.Model):
+    """Связующая модель между резюме студента и проектами."""
+
+    student_resume = models.ForeignKey(
+        "StudentResume",
+        on_delete=models.CASCADE,
+    )
+    project = models.ForeignKey(
+        Project,
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        return f"{self.student_resume} - {self.project}"
+
+
 class StudentResume(models.Model):
     """
     Расширенная модель пользователя для студента.
@@ -190,35 +400,11 @@ class StudentResume(models.Model):
         verbose_name="Дата рождения",
         help_text="Укажите дату рождения студента (при наличии).",
     )
-    education_level = models.CharField(
-        max_length=100,
-        choices=EDUCATION_LEVELS,
-        blank=True,
-        null=True,
-        verbose_name="Уровень образования",
-        help_text="Выберите уровень образования студента (при наличии).",
-    )
     contact_info = models.OneToOneField(
         ContactInfo,
         on_delete=models.CASCADE,
         verbose_name="Контактная информация",
         help_text="Выберите контактную информацию для профиля студента.",
-    )
-    skills = models.ManyToManyField(
-        Skill,
-        related_name="students",
-        blank=True,
-        verbose_name="Навыки",
-        help_text="Выберите навыки, связанные "
-        "с профилем студента (при наличии).",
-    )
-    academic_status = models.ForeignKey(
-        AcademicStatus,
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-        verbose_name="Учебный статус",
-        help_text="Выберите учебный статус студента (при наличии).",
     )
     employment_status = models.ForeignKey(
         EmploymentStatus,
@@ -228,22 +414,25 @@ class StudentResume(models.Model):
         verbose_name="Статус трудоустройства",
         help_text="Выберите статус трудоустройства студента (при наличии).",
     )
-    location = models.ForeignKey(
-        Location,
-        on_delete=models.SET_NULL,
+    photo = models.ImageField(
+        upload_to=student_photo_upload,
         blank=True,
         null=True,
-        verbose_name="Местоположение",
-        help_text="Выберите местоположение студента (при наличии).",
+        verbose_name="Фото",
+        help_text="Загрузите фотографию студента (при наличии).",
     )
-    work_experience = models.ForeignKey(
-        WorkExperience,
-        default="no_experience",
-        on_delete=models.SET_NULL,
+    specialization = models.ForeignKey(
+        Specialization,
+        on_delete=models.CASCADE,
+        verbose_name="Специализация",
         blank=True,
-        null=True,
-        verbose_name="Опыт работы",
-        help_text="Выберите опыт работы студента (при наличии).",
+        help_text="Выберите специализацию",
+    )
+    courses = models.ManyToManyField(
+        Course,
+        related_name="student_specializations",
+        verbose_name="Курсы",
+        blank=True,
     )
     grade = models.ForeignKey(
         Grade,
@@ -253,18 +442,52 @@ class StudentResume(models.Model):
         verbose_name="Грейд",
         help_text="Выберите грейд студента (при наличии).",
     )
+    academic_status = models.ForeignKey(
+        AcademicStatus,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        verbose_name="Учебный статус",
+        help_text="Выберите учебный статус студента (при наличии).",
+    )
+    work_experience = models.ManyToManyField(
+        WorkExperience,
+        blank=True,
+        verbose_name="Опыт работы",
+        help_text="Выберите опыт работы студента (при наличии).",
+    )
+    portfolio = models.ManyToManyField(
+        PortfolioLink,
+        verbose_name="Портфолио-ссылки",
+        blank=True,
+    )
+    projects = models.ManyToManyField(
+        Project,
+        blank=True,
+        verbose_name="Проекты",
+    )
+    languages = models.ManyToManyField(
+        Language, blank=True, verbose_name="Языки"
+    )
+    educations = models.ManyToManyField(
+        Education,
+        blank=True,
+        verbose_name="Уровень образования",
+        help_text="Выберите уровень образования студента (при наличии).",
+    )
     description = models.TextField(
         blank=True,
         null=True,
         verbose_name="О себе",
         help_text="Введите описание студента (при наличии).",
     )
-    photo = models.ImageField(
-        upload_to=student_photo_upload,
+    location = models.ForeignKey(
+        Location,
+        on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        verbose_name="Фото",
-        help_text="Загрузите фотографию студента (при наличии).",
+        verbose_name="Местоположение",
+        help_text="Выберите местоположение студента (при наличии).",
     )
     resume = models.FileField(
         upload_to=student_resume_upload,
@@ -272,19 +495,6 @@ class StudentResume(models.Model):
         null=True,
         verbose_name="Резюме",
         help_text="Загрузите резюме студента (при наличии).",
-    )
-    achievement = models.CharField(
-        max_length=50,
-        blank=True,
-        null=True,
-        verbose_name="Достижения",
-        help_text="Укажите свои достижения (при наличии)."
-    )
-    portfolio = models.URLField(
-        blank=True,
-        null=True,
-        verbose_name="Портфолио",
-        help_text="Прикрепите ссылку на портфолио (при наличии).",
     )
 
     has_higher_education = models.BooleanField(
@@ -316,6 +526,14 @@ class StudentResume(models.Model):
         default=False,
         verbose_name="Отметка о просмотре",
     )
+    experience = models.ForeignKey(
+        Experience,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        verbose_name="Опыт работы",
+        help_text="Выберите опыт работы студента (при наличии).",
+    )
 
     REQUIRED_FIELDS = [
         "date_of_birth",
@@ -332,8 +550,9 @@ class StudentResume(models.Model):
 
 class FavoriteResume(models.Model):
     """
-    Модель избранных резюме.
+    Модель для хранения избранных резюме пользователей.
     """
+
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,

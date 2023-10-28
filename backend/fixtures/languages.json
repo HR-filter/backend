@@ -1,0 +1,128 @@
+[
+    {
+        "model": "students.language",
+        "pk": 1,
+        "fields": {
+            "name": "Английский A1"
+        }
+    },
+    {
+        "model": "students.language",
+        "pk": 2,
+        "fields": {
+            "name": "Английский A2"
+        }
+    },
+    {
+        "model": "students.language",
+        "pk": 3,
+        "fields": {
+            "name": "Английский B1"
+        }
+    },
+    {
+        "model": "students.language",
+        "pk": 4,
+        "fields": {
+            "name": "Английский B2"
+        }
+    },
+    {
+        "model": "students.language",
+        "pk": 5,
+        "fields": {
+            "name": "Английский C1"
+        }
+    },
+    {
+        "model": "students.language",
+        "pk": 6,
+        "fields": {
+            "name": "Английский C2"
+        }
+    },
+    {
+        "model": "students.language",
+        "pk": 7,
+        "fields": {
+            "name": "Французский A1"
+        }
+    },
+    {
+        "model": "students.language",
+        "pk": 8,
+        "fields": {
+            "name": "Французский A2"
+        }
+    },
+    {
+        "model": "students.language",
+        "pk": 9,
+        "fields": {
+            "name": "Французский B1"
+        }
+    },
+    {
+        "model": "students.language",
+        "pk": 10,
+        "fields": {
+            "name": "Французский B2"
+        }
+    },
+    {
+        "model": "students.language",
+        "pk": 11,
+        "fields": {
+            "name": "Французский C1"
+        }
+    },
+    {
+        "model": "students.language",
+        "pk": 12,
+        "fields": {
+            "name": "Французский C2"
+        }
+    },
+    {
+        "model": "students.language",
+        "pk": 13,
+        "fields": {
+            "name": "Немецкий A1"
+        }
+    },
+    {
+        "model": "students.language",
+        "pk": 14,
+        "fields": {
+            "name": "Немецкий A2"
+        }
+    },
+    {
+        "model": "students.language",
+        "pk": 15,
+        "fields": {
+            "name": "Немецкий B1"
+        }
+    },
+    {
+        "model": "students.language",
+        "pk": 16,
+        "fields": {
+            "name": "Немецкий B2"
+        }
+    },
+    {
+        "model": "students.language",
+        "pk": 17,
+        "fields": {
+            "name": "Немецкий C1"
+        }
+    },
+    {
+        "model": "students.language",
+        "pk": 18,
+        "fields": {
+            "name": "Немецкий C2"
+        }
+    }
+]
