@@ -9,10 +9,13 @@ class Command(BaseCommand):
     file_paths = [
         os.path.join("fixtures", "academic_status.json"),
         os.path.join("fixtures", "employment_status.json"),
-        os.path.join("fixtures", "position.json"),
-        os.path.join("fixtures", "work_experience.json"),
+        os.path.join("fixtures", "specializations.json"),
+        os.path.join("fixtures", "skills.json"),
         os.path.join("fixtures", "grade.json"),
         os.path.join("fixtures", "location.json"),
+        os.path.join("fixtures", "courses.json"),
+        os.path.join("fixtures", "languages.json"),
+        os.path.join("fixtures", "experience.json"),
     ]
 
     def handle(self, *args, **options):

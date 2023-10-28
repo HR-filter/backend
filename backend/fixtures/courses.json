@@ -1,0 +1,181 @@
+[
+    {
+        "model": "students.course",
+        "pk": 1,
+        "fields": {
+            "specialization": 1,
+            "skills": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13
+            ]
+        }
+    },
+    {
+        "model": "students.course",
+        "pk": 2,
+        "fields": {
+            "specialization": 2,
+            "skills": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20
+            ]
+        }
+    },
+    {
+        "model": "students.course",
+        "pk": 3,
+        "fields": {
+            "specialization": 3,
+            "skills": [
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30
+            ]
+        }
+    },
+    {
+        "model": "students.course",
+        "pk": 4,
+        "fields": {
+            "specialization": 4,
+            "skills": [
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38
+            ]
+        }
+    },
+    {
+        "model": "students.course",
+        "pk": 5,
+        "fields": {
+            "specialization": 5,
+            "skills": [
+                39,
+                40,
+                41,
+                42,
+                43,
+                44
+            ]
+        }
+    },
+    {
+        "model": "students.course",
+        "pk": 6,
+        "fields": {
+            "specialization": 6,
+            "skills": [
+                45,
+                46,
+                47,
+                48,
+                49,
+                50
+            ]
+        }
+    },
+    {
+        "model": "students.course",
+        "pk": 7,
+        "fields": {
+            "specialization": 7,
+            "skills": [
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65,
+                66,
+                67
+            ]
+        }
+    },
+    {
+        "model": "students.course",
+        "pk": 8,
+        "fields": {
+            "specialization": 8,
+            "skills": [
+                57,
+                61,
+                67,
+                68,
+                69,
+                70,
+                71,
+                72,
+                73
+            ]
+        }
+    },
+    {
+        "model": "students.course",
+        "pk": 9,
+        "fields": {
+            "specialization": 9,
+            "skills": [
+                74,
+                75,
+                76,
+                77,
+                78,
+                79,
+                80,
+                81,
+                82
+            ]
+        }
+    }
+]

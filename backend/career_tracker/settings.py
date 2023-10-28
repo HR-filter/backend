@@ -1,5 +1,4 @@
 import os
-import tempfile
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -7,11 +6,11 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv()
-SECRET_KEY = os.getenv('SECRET_KEY', default='secret0password')
+SECRET_KEY = os.getenv("SECRET_KEY", default="secret0password")
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -29,6 +28,7 @@ INSTALLED_APPS = [
     "users",
     "students",
     "phonenumber_field",
+    "dotenv",
 ]
 
 MIDDLEWARE = [
@@ -66,15 +66,22 @@ TEMPLATES = [
 WSGI_APPLICATION = "career_tracker.wsgi.application"
 
 DATABASES = {
-    'default': {
-        'ENGINE': os.getenv('DB_ENGINE', ''),
-        'NAME': os.getenv('DB_NAME', ''),
-        'USER': os.getenv('POSTGRES_USER', ''),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD', ''),
-        'HOST': os.getenv('DB_HOST', ''),
-        'PORT': os.getenv('DB_PORT', 5432)
+    "default": {
+        "ENGINE": os.getenv("DB_ENGINE", ""),
+        "NAME": os.getenv("DB_NAME", ""),
+        "USER": os.getenv("POSTGRES_USER", ""),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD", ""),
+        "HOST": os.getenv("DB_HOST", ""),
+        "PORT": os.getenv("DB_PORT", 5432),
     }
 }
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -105,11 +112,8 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "collected_static"
 
-# MEDIA_URL = "/media/"
-# MEDIA_ROOT = BASE_DIR / "/media"
-
 MEDIA_URL = "/media/"
-MEDIA_ROOT = tempfile.mkdtemp()
+MEDIA_ROOT = BASE_DIR / "media"
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

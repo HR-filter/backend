@@ -1,0 +1,576 @@
+[
+    {
+        "model": "students.skill",
+        "pk": 1,
+        "fields": {
+            "name": "HTML"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 2,
+        "fields": {
+            "name": "CSS"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 3,
+        "fields": {
+            "name": "Flexbox"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 4,
+        "fields": {
+            "name": "Git"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 5,
+        "fields": {
+            "name": "BASH"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 6,
+        "fields": {
+            "name": "JavaScript"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 7,
+        "fields": {
+            "name": "TypeScript"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 8,
+        "fields": {
+            "name": "React"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 9,
+        "fields": {
+            "name": "Redux"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 10,
+        "fields": {
+            "name": "Grid Layout"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 11,
+        "fields": {
+            "name": "DOM"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 12,
+        "fields": {
+            "name": "Webpack"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 13,
+        "fields": {
+            "name": "React Router"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 14,
+        "fields": {
+            "name": "ООП"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 15,
+        "fields": {
+            "name": "Node.js"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 16,
+        "fields": {
+            "name": "Express"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 17,
+        "fields": {
+            "name": "MongoDB"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 18,
+        "fields": {
+            "name": "PostgreSQL"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 19,
+        "fields": {
+            "name": "Nest.js"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 20,
+        "fields": {
+            "name": "Docker"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 21,
+        "fields": {
+            "name": "Python"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 22,
+        "fields": {
+            "name": "Django"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 23,
+        "fields": {
+            "name": "GitHub"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 24,
+        "fields": {
+            "name": "SQL"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 25,
+        "fields": {
+            "name": "Bash"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 26,
+        "fields": {
+            "name": "Nginx"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 27,
+        "fields": {
+            "name": "Gunicorn"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 28,
+        "fields": {
+            "name": "Docker Hub"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 29,
+        "fields": {
+            "name": "DevTools"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 30,
+        "fields": {
+            "name": "Charles"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 31,
+        "fields": {
+            "name": "Figma"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 32,
+        "fields": {
+            "name": "Яндекс.Трекер"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 33,
+        "fields": {
+            "name": "Android Studio"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 34,
+        "fields": {
+            "name": "Postman"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 35,
+        "fields": {
+            "name": "JSON/XML"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 36,
+        "fields": {
+            "name": "XML/XSD"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 37,
+        "fields": {
+            "name": "Apidoc/Swagger"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 38,
+        "fields": {
+            "name": "Cygwin/Terminal"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 39,
+        "fields": {
+            "name": "Java Core"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 40,
+        "fields": {
+            "name": "Структуры данных"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 41,
+        "fields": {
+            "name": "Алгоритмы"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 42,
+        "fields": {
+            "name": "Базы данных и SQL"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 43,
+        "fields": {
+            "name": "Unit-тестирование"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 44,
+        "fields": {
+            "name": "Spring"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 45,
+        "fields": {
+            "name": "Spring Boot"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 46,
+        "fields": {
+            "name": "Maven"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 47,
+        "fields": {
+            "name": "Mock-тестирование"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 48,
+        "fields": {
+            "name": "Git"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 49,
+        "fields": {
+            "name": "Python"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 50,
+        "fields": {
+            "name": "Jupyter Notebook"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 51,
+        "fields": {
+            "name": "Pandas"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 52,
+        "fields": {
+            "name": "SQL"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 53,
+        "fields": {
+            "name": "Keras"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 54,
+        "fields": {
+            "name": "Catboost"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 55,
+        "fields": {
+            "name": "Scikit-learn"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 56,
+        "fields": {
+            "name": "Figma"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 57,
+        "fields": {
+            "name": "Гайдлайны iOS"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 58,
+        "fields": {
+            "name": "Гайдлайны Android"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 59,
+        "fields": {
+            "name": "Анализ ЦА"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 60,
+        "fields": {
+            "name": "Гипотезы"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 61,
+        "fields": {
+            "name": "Исследования"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 62,
+        "fields": {
+            "name": "UX-копирайтинг"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 63,
+        "fields": {
+            "name": "UX-тестирование"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 64,
+        "fields": {
+            "name": "Конкурентный анализ"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 65,
+        "fields": {
+            "name": "JTBD и User Stories"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 66,
+        "fields": {
+            "name": "Анимация"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 67,
+        "fields": {
+            "name": "Вайрфреймы"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 68,
+        "fields": {
+            "name": "UI-Kit"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 69,
+        "fields": {
+            "name": "Аудит юзабилити"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 70,
+        "fields": {
+            "name": "Adobe Photoshop"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 71,
+        "fields": {
+            "name": "Lean Canvas"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 72,
+        "fields": {
+            "name": "PMF"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 73,
+        "fields": {
+            "name": "Unit-экономика"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 74,
+        "fields": {
+            "name": "GanttPRO"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 75,
+        "fields": {
+            "name": "Miro"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 76,
+        "fields": {
+            "name": "Kaiten"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 77,
+        "fields": {
+            "name": "Google Sheets"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 78,
+        "fields": {
+            "name": "Kanban"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 79,
+        "fields": {
+            "name": "Waterfall"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 80,
+        "fields": {
+            "name": "Agile"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 81,
+        "fields": {
+            "name": "Scrum"
+        }
+    },
+    {
+        "model": "students.skill",
+        "pk": 82,
+        "fields": {
+            "name": "Пачка"
+        }
+    }
+]

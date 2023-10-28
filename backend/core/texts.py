@@ -56,8 +56,19 @@ POSITION_LIST = [
     ("qa_engineer", "Инженер по тестированию"),
     ("java_dev", "Java-разработчик"),
     ("data_scientist", "Специалист по data-science"),
+    ("designer", "Дизайнер интерфейсов"),
+    ("product_designer", "Продуктовый дизайнер"),
+    ("project_manager", "Менеджер проектов"),
 ]
 
+SPECIALIZATION_SKILLS = {
+    "frontend_dev": ["HTML", "CSS", "JavaScript"],
+    "fullstack_dev": ["HTML", "CSS", "JavaScript", "Python", "Django"],
+    "python_dev": ["Python"],
+    "qa_engineer": ["Manual Testing", "Automation Testing"],
+    "java_dev": ["Java", "Spring Framework"],
+    "data_scientist": ["Data Analysis", "Machine Learning", "Python"],
+}
 EXPERIENCE_CHOICES = [
     ("no_experience", "Нет опыта"),
     ("1_to_3_years", "От 1 года до 3 лет"),
