@@ -29,6 +29,7 @@ class StudentResumeFilter(django_filters.FilterSet):
             "has_personal_projects": "has_personal_projects",
             "skills_verified": "skills_verified",
             "has_video_presentation": "has_video_presentation",
+            "is_favorited": "is_favorited",
         }
 
         sum_expression = None

@@ -556,7 +556,7 @@ class FavoriteResume(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name="favorite_by",
+        related_name="favorites",
         verbose_name="Пользователь",
         help_text="Выберите пользователя, "
         "который добавляет резюме в избранное.",
@@ -564,7 +564,7 @@ class FavoriteResume(models.Model):
     resume = models.ForeignKey(
         StudentResume,
         on_delete=models.CASCADE,
-        related_name="favorited_resumes",
+        related_name="favorites",
         verbose_name="Избранное резюме",
         help_text="Выберите резюме, добавляемое в избранное.",
     )

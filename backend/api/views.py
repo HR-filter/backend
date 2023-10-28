@@ -40,6 +40,9 @@ class StudentUserViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
     filterset_class = StudentResumeFilter
 
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
     @action(
         detail=True,
         methods=["post"],
@@ -47,7 +50,7 @@ class StudentUserViewSet(viewsets.ModelViewSet):
     def favorite(self, request, pk):
         resume = get_object_or_404(StudentResume, id=pk)
         user = request.user
-        data = {"user": user.id, "recipe": resume.id}
+        data = {"user": user.id, "resume": resume.id}
 
         serializer = FavoriteSerializer(
             data=data,
@@ -97,7 +100,7 @@ class FilterOptionsViewSet(viewsets.ViewSet):
 
         for model, serializer in model_serializers.items():
             queryset = model.objects.all()
-            data[model.__name__] = serializer(queryset, many=True).data
+            data[model.__name__.lower()] = serializer(queryset, many=True).data
 
         return Response(data)
 

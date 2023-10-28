@@ -233,7 +233,7 @@ class StudentResumeSerializer(serializers.ModelSerializer):
         user = self.context.get("request").user
         if user.is_authenticated:
             return instance.favorites.filter(
-                user=user, recipe=instance
+                user=user, resume=instance
             ).exists()
         return False
 
@@ -242,5 +242,5 @@ class FavoriteSerializer(serializers.ModelSerializer):
     """Серилизатор для избранных резюме."""
 
     class Meta:
-        fields = ("recipe", "user")
+        fields = ("resume", "user")
         model = FavoriteResume
