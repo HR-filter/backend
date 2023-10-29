@@ -10,7 +10,12 @@ SECRET_KEY = os.getenv("SECRET_KEY", default="secret0password")
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [
+    "career-tracker5.ddns.net",
+    "localhost",
+    "57.129.19.200",
+    "127.0.0.1",
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
