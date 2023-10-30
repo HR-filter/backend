@@ -112,6 +112,11 @@ class WorkExperience(models.Model):
         verbose_name="Дата окончания работы",
         help_text="Укажите дату окончания работы.",
     )
+    position = models.CharField(
+        max_length=BASIC_LEN,
+        verbose_name="Должность",
+        help_text="Укажите должность студента на данном месте работы.",
+    )
     description = models.TextField(
         blank=True,
         null=True,
@@ -227,7 +232,10 @@ class Skill(models.Model):
 
 class Course(models.Model):
     """Модель, связывающая специализацию с навыками, необходимыми для курса."""
-
+    name = models.CharField(
+        max_length=BASIC_LEN,
+        verbose_name="Название курса"
+    )
     specialization = models.ForeignKey(
         Specialization,
         on_delete=models.CASCADE,
@@ -425,7 +433,7 @@ class StudentResume(models.Model):
         Specialization,
         on_delete=models.CASCADE,
         verbose_name="Специализация",
-        blank=True,
+        blank=True, 
         help_text="Выберите специализацию",
     )
     courses = models.ManyToManyField(

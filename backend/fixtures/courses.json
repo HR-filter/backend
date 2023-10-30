@@ -3,6 +3,7 @@
         "model": "students.course",
         "pk": 1,
         "fields": {
+            "name": "Яндекс Практикум",
             "specialization": 1,
             "skills": [
                 1,
@@ -25,6 +26,7 @@
         "model": "students.course",
         "pk": 2,
         "fields": {
+            "name": "Яндекс Практикум",
             "specialization": 2,
             "skills": [
                 1,
@@ -54,6 +56,7 @@
         "model": "students.course",
         "pk": 3,
         "fields": {
+            "name": "Яндекс Практикум",
             "specialization": 3,
             "skills": [
                 21,
@@ -73,6 +76,7 @@
         "model": "students.course",
         "pk": 4,
         "fields": {
+            "name": "Яндекс Практикум",
             "specialization": 4,
             "skills": [
                 31,
@@ -90,6 +94,7 @@
         "model": "students.course",
         "pk": 5,
         "fields": {
+            "name": "Яндекс Практикум",
             "specialization": 5,
             "skills": [
                 39,
@@ -105,6 +110,7 @@
         "model": "students.course",
         "pk": 6,
         "fields": {
+            "name": "Яндекс Практикум",
             "specialization": 6,
             "skills": [
                 45,
@@ -120,6 +126,7 @@
         "model": "students.course",
         "pk": 7,
         "fields": {
+            "name": "Яндекс Практикум",
             "specialization": 7,
             "skills": [
                 51,
@@ -146,6 +153,7 @@
         "model": "students.course",
         "pk": 8,
         "fields": {
+            "name": "Яндекс Практикум",
             "specialization": 8,
             "skills": [
                 57,
@@ -164,6 +172,7 @@
         "model": "students.course",
         "pk": 9,
         "fields": {
+            "name": "Яндекс Практикум",
             "specialization": 9,
             "skills": [
                 74,

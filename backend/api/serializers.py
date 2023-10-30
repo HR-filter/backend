@@ -55,27 +55,19 @@ class BaseSerializer(serializers.Serializer):
 
 
 class AcademicStatusSerializer(BaseSerializer):
-    class Meta:
-        model = AcademicStatus
-        fields = ["id", "name"]
+    pass
 
 
 class SkillSerializer(BaseSerializer):
-    class Meta:
-        model = Skill
-        fields = ["id", "name"]
+    pass
 
 
 class SpecializationStatusSerializer(BaseSerializer):
-    class Meta:
-        model = Specialization
-        fields = ["id", "name"]
+    pass
 
 
 class EmploymentStatusSerializer(BaseSerializer):
-    class Meta:
-        model = EmploymentStatus
-        fields = ["id", "name"]
+    pass
 
 
 class WorkExperienceSerializer(serializers.ModelSerializer):
@@ -86,6 +78,7 @@ class WorkExperienceSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "name",
+            "position",
             "start_date",
             "end_date",
             "description",
@@ -111,21 +104,15 @@ class ExperienceSerializer(BaseSerializer):
 
 
 class GradeSerializer(BaseSerializer):
-    class Meta:
-        model = Grade
-        fields = ["id", "name"]
+    pass
 
 
 class LocationSerializer(BaseSerializer):
-    class Meta:
-        model = Location
-        fields = ["id", "name"]
+    pass
 
 
 class LanguageSerializer(BaseSerializer):
-    class Meta:
-        model = Language
-        fields = ["id", "name"]
+    pass
 
 
 class EducationSerializer(serializers.ModelSerializer):
@@ -141,7 +128,7 @@ class EducationSerializer(serializers.ModelSerializer):
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = ["title", "description"]
+        fields = ["id", "title", "description"]
 
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -150,7 +137,7 @@ class CourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields = ["id", "specialization", "skills"]
+        fields = ["id", "name", "specialization", "skills"]
 
 
 class PortfolioLinkSerializer(serializers.ModelSerializer):
