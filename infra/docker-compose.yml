@@ -15,10 +15,7 @@ services:
       - ../.env
 
   backend:
-    # image: vlkazmin/career_tracker_backend
-    build:
-      context: ../backend
-      dockerfile: Dockerfile
+    image: vlkazmin/career_tracker_backe
     restart: always
     ports:
       - "8000:8000"
