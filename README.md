@@ -31,7 +31,7 @@ docker compose up -d
 docker compose -f docker-compose.yml exec backend python manage.py createsuperuser
 ```
 ***
-**Проект будет доступен по адресу -  http://localhost:8000/**
+**Проект будет доступен по адресу -  http://localhost/**
 ***
 **Доступные команды**
 - python manage.py load_fixtures - загрузите фикстуры
@@ -43,7 +43,7 @@ docker compose -f docker-compose.yml exec backend python manage.py createsuperus
 Вот основные конечные точки API и как к ним обратиться:
 
 #### ***Адрес документации API***:
-* Документация API доступна по адресу http://localhost:8000/api/v1/redoc
+* Документация API доступна по адресу http://localhost/api/v1/redoc
 * Здесь вы найдете подробные сведения о каждом эндпоинте, поддерживаемых методах и структуре запросов и ответов.
 #### ***Регистрация и аутентификация***:
 * Для доступа к большинству функций API, вам потребуется аутентифицироваться. Вы можете зарегистрировать нового пользователя через эндпоинт POST /api/v1/users/. После успешной регистрации вы можете получить токен доступа по адресу /api/v1/auth/token/login, который необходимо передавать в заголовке Authorization для аутентификации в последующих запросах.
