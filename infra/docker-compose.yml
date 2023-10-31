@@ -15,7 +15,7 @@ services:
       - ../.env
 
   backend:
-    image: vlkazmin/career_tracker_backe
+    image: vlkazmin/career_tracker_back
     restart: always
     ports:
       - "8080:8080"

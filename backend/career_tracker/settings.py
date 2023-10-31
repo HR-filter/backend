@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv()
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY", "secret_key")
 
 DEBUG = bool(os.getenv("DEBUG", False))
 
@@ -78,7 +78,13 @@ DATABASES = {
         "PASSWORD": os.getenv("POSTGRES_PASSWORD", ""),
         "HOST": os.getenv("DB_HOST", ""),
         "PORT": os.getenv("DB_PORT", 5432),
-    }
+    },
+    "test": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(
+            BASE_DIR, "db.sqlite3"
+        ),  # или другой путь к файлу
+    },
 }
 # DATABASES = {
 #     "default": {

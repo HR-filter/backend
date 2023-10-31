@@ -10,4 +10,6 @@ cp -r /app/collected_static/. /backend_static/static/
 
 python manage.py load_fixtures
 
+python -m pytest
+
 exec gunicorn career_tracker.wsgi:application --bind 0.0.0.0:8080

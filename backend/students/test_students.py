@@ -1,177 +1,310 @@
-import tempfile
-
 import pytest
-
-from django.core.files.uploadedfile import SimpleUploadedFile
 
 from .models import (
     AcademicStatus,
     ContactInfo,
     EmploymentStatus,
-    Position,
     StudentResume,
+    WorkExperience,
+    Grade,
+    Location,
+    Experience,
+    Specialization,
+    Skill,
+    Course,
+    Education,
+    PortfolioLink,
+    Project,
+    Language,
     User,
 )
 
 
-@pytest.fixture()
-def user_data():
-    return {
-        "username": "testuser",
-        "first_name": "Test",
-        "last_name": "User",
-        "email": "test@example.com",
-    }
-
-
-@pytest.fixture()
-def user(user_data):
-    return User.objects.create(**user_data)
-
-
-@pytest.fixture()
-def contact_info_data():
-    return {
-        "phone_number": "+123456789",
-        "alternate_email": "alternate@example.com",
-        "telegram_login": "@testuser",
-    }
-
-
-@pytest.fixture()
-def contact_info(contact_info_data):
-    return ContactInfo.objects.create(**contact_info_data)
-
-
-@pytest.fixture()
-def position_data():
-    return {"name": "Fullstack Developer"}
-
-
-@pytest.fixture()
-def position(position_data):
-    return Position.objects.create(**position_data)
-
-
-@pytest.fixture()
-def academic_status_data():
-    return {"name": "Academic Leave"}
-
-
-@pytest.fixture()
-def academic_status(academic_status_data):
-    return AcademicStatus.objects.create(**academic_status_data)
-
-
-@pytest.fixture()
-def employment_status_data():
-    return {"name": "Job Search"}
-
-
-@pytest.fixture()
-def employment_status(employment_status_data):
-    return EmploymentStatus.objects.create(**employment_status_data)
-
-
-@pytest.fixture()
-def student_data(
-    user,
-    contact_info,
-    academic_status,
-    employment_status,
-):
-    return {
-        "user": user,
-        "date_of_birth": "2000-01-01",
-        "education_level": "college",
-        "contact_info": contact_info,
-        "academic_status": academic_status,
-        "employment_status": employment_status,
-        "city": "Test City",
-        "work_experience": "Some experience",
-        "grade": "junior",
-    }
-
-
-@pytest.fixture()
-def student(student_data):
-    return StudentResume.objects.create(**student_data)
-
-
-@pytest.fixture()
-def temporary_file():
-    with tempfile.NamedTemporaryFile(delete=False) as temp_file:
-        return SimpleUploadedFile(temp_file.name, b"file_content")
-
-
-@pytest.fixture()
-def student_with_photo(student_data, temporary_file):
-    student_data["photo"] = temporary_file
-    return StudentResume.objects.create(**student_data)
+@pytest.mark.django_db
+def test_create_contact_info():
+    """Тест на создание объекта ContactInfo."""
+    contact = ContactInfo.objects.create(
+        phone_number="1234567890",
+        alternate_email="test@example.com",
+        telegram_login="test_telegram",
+    )
+    assert contact.phone_number == "1234567890"
+    assert contact.alternate_email == "test@example.com"
+    assert contact.telegram_login == "test_telegram"
+    assert str(contact) == "test@example.com"
 
 
 @pytest.mark.django_db
-def test_create_student_user(
-    user,
-    contact_info,
-    position,
-    academic_status,
-    employment_status,
-):
-    student_data = {
-        "user": user,
-        "date_of_birth": "2000-01-01",
-        "education_level": "college",
-        "contact_info": contact_info,
-        "academic_status": academic_status,
-        "employment_status": employment_status,
-        "city": "Test City",
-        "work_experience": "Some experience",
-        "grade": "junior",
-    }
-
-    student = StudentResume(**student_data)
-    student.save()
-
-    assert student.user.username == "testuser"
+def test_create_employment_status():
+    """Тесты для модели EmploymentStatus"""
+    status = EmploymentStatus.objects.create(name="Employed")
+    assert str(status) == "Employed"
 
 
 @pytest.mark.django_db
-def test_student_user_photo_upload(student_with_photo):
-    assert student_with_photo.photo.name.startswith("student_photos/")
-    assert student_with_photo.photo.size > 0
+def test_create_academic_status():
+    """Тесты для модели AcademicStatus"""
+    status = AcademicStatus.objects.create(name="Undergraduate")
+    assert str(status) == "Undergraduate"
 
 
 @pytest.mark.django_db
-def test_student_user_display_values():
-    academic_status = AcademicStatus(name="Academic Leave")
-    employment_status = EmploymentStatus(name="Job Search")
-    position = Position(name="Fullstack Developer")
-
-    assert academic_status.__str__() == "Academic Leave"
-    assert employment_status.__str__() == "Job Search"
-    assert position.__str__() == "Fullstack Developer"
-
-
-@pytest.mark.django_db
-def test_student_user_str_representation(user, contact_info):
-    student_data = {
-        "user": user,
-        "date_of_birth": "2000-01-01",
-        "education_level": "college",
-        "contact_info": contact_info,
-        "city": "Test City",
-    }
-
-    student = StudentResume(**student_data)
-    student.save()
-
-    assert student.__str__() == "Test User"
+def test_create_work_experience():
+    """Тесты для модели WorkExperience"""
+    experience = WorkExperience.objects.create(
+        name="Workplace",
+        start_date="2023-01-01",
+        end_date="2023-12-31",
+        position="Employee",
+        description="Description of work experience",
+    )
+    assert experience.name == "Workplace"
+    assert experience.position == "Employee"
+    assert str(experience) == "Workplace"
 
 
 @pytest.mark.django_db
-def test_student_user_creation_db(student_data):
-    student = StudentResume(**student_data)
-    student.save()
+def test_create_grade():
+    """Тесты для модели Grade"""
+    grade = Grade.objects.create(name="junior")
+    assert str(grade) == "Junior"
 
-    assert StudentResume.objects.count() == 1
+
+@pytest.mark.django_db
+def test_create_location():
+    """Тесты для модели Location"""
+    location = Location.objects.create(name="Moscow")
+    assert str(location) == "Moscow"
+
+
+@pytest.mark.django_db
+def test_create_experience():
+    """Тесты для модели Experience"""
+    experience = Experience.objects.create(name="no_experience")
+    assert str(experience) == "Нет опыта"
+
+
+@pytest.mark.django_db
+def test_create_specialization():
+    """Тесты для модели Specialization"""
+    specialization = Specialization.objects.create(name="python_dev")
+    assert str(specialization) == "Python-разработчик"
+
+
+@pytest.mark.django_db
+def test_create_skill():
+    """Тесты для модели Skill"""
+    skill = Skill.objects.create(name="Python")
+    assert str(skill) == "Python"
+
+
+@pytest.mark.django_db
+def test_create_course():
+    """Тесты для модели Course"""
+    specialization = Specialization.objects.create(name="Web Developer")
+    course = Course.objects.create(
+        name="Python Course", specialization=specialization
+    )
+    skill = Skill.objects.create(name="Python")
+    course.skills.add(skill)
+    assert str(course) == "Web Developer"
+
+
+@pytest.mark.django_db
+def test_create_portfolio_link():
+    """Тесты для модели PortfolioLink"""
+    link = PortfolioLink.objects.create(url="https://example.com")
+    assert str(link) == "https://example.com"
+
+
+@pytest.mark.django_db
+def test_create_project():
+    """Тесты для модели Project"""
+    project = Project.objects.create(
+        title="Sample Project",
+        description="Description of the sample project.",
+    )
+    assert str(project) == "Sample Project"
+
+
+@pytest.mark.django_db
+def test_create_language():
+    """Тесты для модели Language"""
+    language = Language.objects.create(name="English (Advanced)")
+    assert str(language) == "English (Advanced)"
+
+
+@pytest.mark.django_db
+def test_create_education():
+    """Тесты для модели Education"""
+    education = Education.objects.create(
+        institution="University",
+        specialization="Computer Science",
+        education_level="college",
+    )
+    assert str(education) == "Средне-специальное образование"
+
+
+@pytest.fixture
+def user():
+    """Фикстура для создания объекта User."""
+    user = User.objects.create(username="testuser")
+    return user
+
+
+@pytest.fixture
+def contact_info():
+    contact_info = ContactInfo.objects.create(phone_number="1234567890")
+    return contact_info
+
+
+@pytest.mark.django_db
+def test_create_student_resume(user, contact_info):
+    """Фикстура для создания объекта ContactInfo."""
+    student_resume = StudentResume.objects.create(
+        user=user,
+        contact_info=contact_info,
+        date_of_birth="2000-01-01",
+    )
+    assert student_resume.user.username == "testuser"
+    assert student_resume.contact_info.phone_number == "1234567890"
+
+
+@pytest.mark.django_db
+def test_add_specialization_and_courses(user, contact_info):
+    """Тест на создание объекта StudentResume и связанных с ним объектов."""
+    specialization = Specialization.objects.create(name="Web Development")
+    course1 = Course.objects.create(
+        name="Web Development Course 1", specialization=specialization
+    )
+    course2 = Course.objects.create(
+        name="Web Development Course 2", specialization=specialization
+    )
+
+    student_resume = StudentResume.objects.create(
+        user=user, contact_info=contact_info
+    )
+    student_resume.specialization = specialization
+    student_resume.courses.add(course1, course2)
+    student_resume.save()
+
+    assert student_resume.specialization.name == "Web Development"
+    assert list(student_resume.courses.all()) == [course1, course2]
+
+
+@pytest.mark.django_db
+def test_add_projects_and_languages(user, contact_info):
+    """Тест на создание объекта StudentResume и kabguages"""
+    project1 = Project.objects.create(
+        title="Project 1", description="Description of Project 1"
+    )
+    project2 = Project.objects.create(
+        title="Project 2", description="Description of Project 2"
+    )
+    language1 = Language.objects.create(name="English")
+    language2 = Language.objects.create(name="Spanish")
+
+    student_resume = StudentResume.objects.create(
+        user=user, contact_info=contact_info
+    )
+    student_resume.projects.add(project1, project2)
+    student_resume.languages.add(language1, language2)
+    student_resume.save()
+
+    assert list(student_resume.projects.all()) == [project1, project2]
+    assert list(student_resume.languages.all()) == [language1, language2]
+
+
+@pytest.mark.django_db
+def test_add_education(user, contact_info):
+    """Тест для связи с моделью Education"""
+    education = Education.objects.create(
+        institution="University", specialization="Computer Science"
+    )
+    student_resume = StudentResume.objects.create(
+        user=user, contact_info=contact_info
+    )
+    student_resume.educations.add(education)
+    student_resume.save()
+
+    assert list(student_resume.educations.all()) == [education]
+
+
+@pytest.mark.django_db
+def test_set_flags(user, contact_info):
+    """Тесты для флагов"""
+    student_resume = StudentResume.objects.create(
+        user=user, contact_info=contact_info
+    )
+    student_resume.has_higher_education = True
+    student_resume.has_participated_in_hackathons = False
+    student_resume.has_personal_projects = True
+    student_resume.skills_verified = True
+    student_resume.has_video_presentation = False
+    student_resume.save()
+
+    assert student_resume.has_higher_education is True
+    assert student_resume.has_participated_in_hackathons is False
+    assert student_resume.has_personal_projects is True
+    assert student_resume.skills_verified is True
+    assert student_resume.has_video_presentation is False
+
+
+@pytest.mark.django_db
+def test_add_portfolio_links(user, contact_info):
+    """Тест для связи с моделью PortfolioLink"""
+    link1 = PortfolioLink.objects.create(url="https://portfolio1.com")
+    link2 = PortfolioLink.objects.create(url="https://portfolio2.com")
+
+    student_resume = StudentResume.objects.create(
+        user=user, contact_info=contact_info
+    )
+    student_resume.portfolio.add(link1, link2)
+    student_resume.save()
+
+    assert list(student_resume.portfolio.all()) == [link1, link2]
+
+
+@pytest.mark.django_db
+def test_set_location_and_education(user, contact_info):
+    """Тест для связи с моделью Location и Education"""
+    location = Location.objects.create(name="City A")
+    education = Education.objects.create(
+        institution="University", specialization="Computer Science"
+    )
+
+    student_resume = StudentResume.objects.create(
+        user=user, contact_info=contact_info
+    )
+    student_resume.location = location
+    student_resume.educations.add(education)
+    student_resume.save()
+
+    assert student_resume.location == location
+    assert list(student_resume.educations.all()) == [education]
+
+
+@pytest.mark.django_db
+def test_set_description(user, contact_info):
+    """Тест поля description_text"""
+    description_text = "I am a dedicated and passionate student."
+    student_resume = StudentResume.objects.create(
+        user=user, contact_info=contact_info
+    )
+    student_resume.description = description_text
+    student_resume.save()
+
+    assert student_resume.description == description_text
+
+
+@pytest.mark.django_db
+def test_set_resume(user, contact_info):
+    """Тест поля resume_path"""
+    resume_path = "path/to/resume.pdf"
+    student_resume = StudentResume.objects.create(
+        user=user, contact_info=contact_info
+    )
+    student_resume.resume = resume_path
+    student_resume.save()
+
+    assert student_resume.resume == resume_path
