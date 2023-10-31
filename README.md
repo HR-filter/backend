@@ -3,6 +3,14 @@
 ---
 Карьерный Трекер - это проект, созданный для отслеживания и управления информацией о студентах и их академическом и профессиональном развитии. Это приложение предоставляет возможности для хранения резюме студентов, фильтрации резюме по различным критериям, а также управления избранными резюме. Проект разработан на платформе Django REST framework.
 ***
+
+## Авторы
+
+Авторы проекта (backend):
+
+- **Владислав Казьмин** - [GitHub](https://github.com/vlkazmin)
+- **Анастасия** - [GitHub](https://github.com/Anastasia7Si)
+
 ## Технологии
 - Python 3.10
 - Django 3.2.3
@@ -264,16 +272,10 @@ docker compose -f docker-compose.yml exec backend python manage.py createsuperus
 ```GET /api/v1/filters/```
 ```GET /api/v1/boolean-filters/```
 
- ## Авторы
-
-Авторы проекта (backend):
-
-- **Владислав Казьмин** - [GitHub](https://github.com/vlkazmin)
-- **Анастасия** - [GitHub](https://github.com/Anastasia7Si)
-
  
- 
- 
+## Архив с кодом
+
+https://disk.yandex.ru/d/5zK7h9Mcze3-hQ
  
  
  
