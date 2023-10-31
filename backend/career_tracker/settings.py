@@ -6,15 +6,15 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv()
-SECRET_KEY = os.getenv("SECRET_KEY", default="secret0password")
+SECRET_KEY = os.getenv("SECRET_KEY")
 
-DEBUG = True
+DEBUG = bool(os.getenv("DEBUG", False))
 
 ALLOWED_HOSTS = [
-    "career-tracker5.ddns.net",
-    "localhost",
-    "57.129.19.200",
+    "57.129.19.111",
     "127.0.0.1",
+    "localhost",
+    "career-tracker5.ddns.net",
 ]
 
 INSTALLED_APPS = [

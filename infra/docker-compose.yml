@@ -18,7 +18,7 @@ services:
     image: vlkazmin/career_tracker_backe
     restart: always
     ports:
-      - "8000:8000"
+      - "8080:8080"
     env_file:
       - ../.env
     volumes:

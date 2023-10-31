@@ -11,3 +11,4 @@ pytest
 python-dotenv==1.0.0
 psycopg2-binary==2.9.8
 gunicorn==20.1.0
+django-cors-headers==3.13.0
