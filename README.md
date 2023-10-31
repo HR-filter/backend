@@ -33,6 +33,9 @@ docker compose -f docker-compose.yml exec backend python manage.py createsuperus
 ***
 **Проект будет доступен по адресу -  http://localhost:8000/**
 ***
+**Доступные команды**
+- python manage.py load_fixtures - загрузите фикстуры
+- python -m pytest - запустить тесты
 
 
 ## Документация API
